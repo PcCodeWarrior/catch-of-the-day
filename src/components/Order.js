@@ -7,11 +7,18 @@
  */
 
 import React from "react";
+import PropTypes from 'prop-types';
 import {formatPrice} from "../helpers";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 
 
 class Order extends React.Component {
+        static propTypes = {
+            fishes: PropTypes.object,
+            order: PropTypes.object,
+            remvoeFromOrder: PropTypes.func
+        };
+
 
     renderOrder = key => {
         const fish = this.props.fishes[key];
@@ -30,17 +37,18 @@ class Order extends React.Component {
             );
         }
         return (
-            <CSSTransition classNames="order" key={key} timeout={{enter: 500, exit: 500}}>
+            <CSSTransition {...transitionOptions}>
                 <li key={key}>
                     <span>
                         <TransitionGroup  component="span" className="count">
-                            <CSSTransition{...transitionOptions}>
+                            <CSSTransition classNames="count"
+                                              key={count}
+                                              timeout={{ enter: 500, exit: 500 }}>
                                 <span>{count}</span>
                             </CSSTransition>
                         </TransitionGroup>
 
-                        lbs {fish.name}
-                        {formatPrice(count * fish.price)}
+                        lbs {fish.name}  {formatPrice(count * fish.price)}
                         <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
                         </span>
                 </li>
@@ -68,8 +76,7 @@ class Order extends React.Component {
                     {orderIds.map(this.renderOrder)}
                 </TransitionGroup>
                 <div className="total">
-                    Total:
-                    <strong>{formatPrice(total)}</strong>
+                    Total: <strong>{formatPrice(total)}</strong>
                 </div>
             </div>
 

@@ -2,6 +2,7 @@
  * Created by tom on 3/21/2018.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
@@ -14,6 +15,10 @@ class App extends React.Component {
     state = {
         fishes: {},
         order: {}
+    };
+
+    static propTypes = {
+        match: PropTypes.object
     };
 
     componentDidMount() {
