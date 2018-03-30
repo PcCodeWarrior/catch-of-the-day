@@ -18,7 +18,7 @@ const Header = ({tagline}) =>
                 <h3 className="tagline">
                     <span>{tagline}</span>
                 </h3>
-    </header>
+    </header>;
 
 Header.propTypes = {
     tagline: PropTypes.string.isRequired
